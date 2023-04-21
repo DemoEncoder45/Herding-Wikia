@@ -6,16 +6,42 @@ import { Text,View, Platform, StyleSheet, ScrollView } from "react-native";
 import { NavigationContainer, createStackNavigator } from "@react-navigation/stack";
 import { createDrawerNavigator, DrawerItemList, DrawerContentScrollView } from "@react-navigation/drawer";
 import { Header } from 'react-native-elements';
+import DogDirectory from './DogDirectory';
+import HerderInfoScreen from './HerderInfoScreen';
 
 
-//A dog of the month Card
-//Featured Dog or article about dog
-//Fun fact
+const screenOptions = {
+    headerTintColor: "#33ccff"
+   
+
+}
 
 
 
-const HomeNavi = () => {
+const DirectoryNavi = () => {
+    const Stack = createStackNavigator();
 
+    return (
+        <Stack.Navigator
+            initialRouteName='Directory'
+            screenOptions={screenOptions}
+        >
+            <Stack.Screen 
+                name='Directory'
+                component={DogDirectory}
+                //This will be the title that is shown on the top
+                options={{title: "Dog Directory"}}
+            />
+
+            <Stack.Screen
+                name='HerderInfo'
+                component={HerderInfoScreen}
+                options={({route}) => ({
+                    title: route.params.dog.name
+                })}
+            />
+        </Stack.Navigator>
+    )
 }
 
 
@@ -23,6 +49,9 @@ const Main = () => {
 
     return (
         <ScrollView>
+            <View style={{flex: 1, paddingTop: Platform.OS === 'ios' ? 0 : Constants.statusBarHeight}}>
+                <DirectoryNavi/>
+            </View>
             <View style={styles.headingView} >
                 <Header/>
                 <Text style={styles.headingText}>
@@ -55,5 +84,8 @@ const styles =  StyleSheet.create({
     }
 })
 
+//A dog of the month Card
+//Featured Dog or article about dog
+//Fun fact
 
 export default Main;
