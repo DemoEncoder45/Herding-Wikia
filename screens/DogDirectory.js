@@ -1,6 +1,8 @@
 import {baseUrl} from '../shared/baseUrl';
 import { Tile } from "react-native-elements";
 import { FlatList,View,Text } from "react-native";
+import * as Animatable from 'react-native-animatable';
+
 
 import { useSelector } from 'react-redux';
 
